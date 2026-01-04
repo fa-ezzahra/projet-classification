@@ -38,20 +38,13 @@ ENV/
 .ipynb_checkpoints
 
 # Models (trop volumineux pour Git)
-models/cv/*.pth
-models/cv/*.pt
-models/nlp/*/pytorch_model.bin
-models/nlp/*/tf_model.h5
+# Models (ML / DL - trop volumineux pour Git)
+models/
 
 # Data
-data/raw/*.pdf
-data/processed/*.png
-data/processed/*.jpg
-
+data/
 # Outputs
-outputs/*.json
-outputs/*.txt
-outputs/*.csv
+outputs/
 
 # Logs
 logs/*.log
