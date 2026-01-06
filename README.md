@@ -13,10 +13,8 @@ Classifier automatiquement des documents administratifs marocains en utilisant u
 ## 📋 Classes de Documents
 
 1. **Pièce d'identité** - CNIE (Recto et Verso)
-2. **Relevé bancaire** - Différentes banques marocaines
-3. **Facture d'électricité** - ONE, RADEM, Lydec, Redal
-4. **Facture d'eau** - Différentes régies
-5. **Document employeur** - Bulletins de paie + Attestations de Travail
+2. **Relevé notes** - Différentes banques marocaines
+3. **Facture d'eau et d'électricité** - ONE, RADEM, Lydec, Redal
 
 ## 🏗️ Architecture du Système
 
@@ -28,8 +26,18 @@ projet_classification/
 │   └── gabarits/          # Définitions des gabarits
 ├── data/
 │   ├── raw/               # Documents PDF bruts
-│   ├── processed/         # Images prétraitées
-│   └── annotations/       # Labels et métadonnées
+│   ├── organised
+            ├── facture
+            ├── piece_identite
+    │       ├── releve_notes        
+    └── augmented/    #pour augmenter data
+          ├── facture
+          ├── piece_identite
+          ├── releve_notes     
+      └── small_train/  #pour nlp 
+          ├── facture
+          ├── piece_identite
+          ├── releve_notes   
 ├── src/
 │   ├── preprocessing/     # Prétraitement PDF/images
 │   ├── computer_vision/   # Modèles CNN
@@ -42,7 +50,11 @@ projet_classification/
 ├── config.yaml            # Configuration
 ├── requirements.txt       # Dépendances Python
 ├── setup_offline.py       # Script d'initialisation
-└── main.py               # Point d'entrée principal
+└── main.py                # Point d'entrée principal
+└── train_models.py    
+└── prepare_dataset.py 
+└── configure_tesseract.py  #pour la configuration de tesseract
+              
 ```
 
 ## 🚀 Installation
