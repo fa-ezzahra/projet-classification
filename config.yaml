@@ -1,0 +1,93 @@
+# Configuration du Projet de Classification de Documents
+
+# Chemins
+paths:
+  models_dir: "models/"
+  data_raw: "data/raw/"
+  data_processed: "data/processed/"
+  outputs: "outputs/"
+  
+# Classes de documents
+classes:
+  - "piece_identite"      # CNIE Recto/Verso
+  - "releve_notes"     # Relevés bancaires
+  - "facture" # ONE, RADEM, Lydec, Redal
+
+# Paramètres Computer Vision
+computer_vision:
+  backbone: "resnet50_hybrid"  # ou "efficientnet"
+  input_size: [224, 224]
+  batch_size: 16
+  learning_rate: 0.0001
+  epochs: 50
+  early_stopping_patience: 10
+  
+# Paramètres NLP
+nlp:
+  model_name: "camembert-base"
+  max_length: 512
+  batch_size: 8
+  learning_rate: 0.00002
+  epochs: 30
+  
+# Paramètres OCR
+ocr:
+  language: "fra"
+  psm: 3  # Page segmentation mode
+  oem: 3  # OCR Engine mode
+  dpi: 300
+  preprocessing:
+    denoise: true
+    contrast_enhancement: true
+    deskew: true
+
+# Paramètres Gabarits
+gabarits:
+  # Pièce d'identité
+  piece_identite:
+    aspect_ratio: [1.5, 1.7]  # Format carte
+    has_photo: true
+    text_density: [0.3, 0.5]
+    
+  # Relevé bancaire
+  releve_notes:
+    has_table: true
+    vertical_lines: true
+    numeric_density: 0.2
+    
+  # Factures
+  facture:
+    has_table: true
+    has_amounts: true
+    measurement_units: ["kWh", "m³", "DH"]
+
+# Paramètres Fusion
+fusion:
+  # Seuils de confiance
+  confidence_thresholds:
+    high: 0.9
+    medium: 0.7
+    low: 0.5
+    
+  # Pondération des modèles
+  weights:
+    cv: 0.4
+    nlp: 0.3
+    gabarits: 0.3
+    
+  # Stratégies
+  perfect_agreement_threshold: 0.8
+  rejection_threshold: 0.5
+
+# Métriques et Évaluation
+evaluation:
+  min_accuracy_per_class: 0.90
+  test_split: 0.15
+  validation_split: 0.15
+  
+# Performance
+performance:
+  use_gpu: true
+  num_workers: 4
+  cache_models: true
+  multiprocessing: true
